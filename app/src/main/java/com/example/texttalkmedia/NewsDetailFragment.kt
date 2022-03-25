@@ -1,5 +1,6 @@
 package com.example.texttalkmedia
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import com.example.texttalkmedia.databinding.FragmentNewsDetailBinding
 class NewsDetailFragment : Fragment() {
 
     private lateinit var fragmentNewsDetailBinding: FragmentNewsDetailBinding
+    private lateinit var news: Article
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +27,7 @@ class NewsDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentNewsDetailBinding = FragmentNewsDetailBinding.bind(view)
         val args: NewsDetailFragmentArgs by navArgs()
-        val news = args.selectedNewsItem
+        news = args.selectedNewsItem
         setData(news)
     }
 
@@ -42,21 +44,30 @@ class NewsDetailFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu,menu)
+        inflater.inflate(R.menu.menu, menu)
         val item: MenuItem = menu.findItem(R.id.share)
         item.isVisible = (activity as MainActivity).showMenu
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.share -> {
-            // User chose the "Settings" item, show the app settings UI...
+            share()
             true
         }
-
         else -> {
-            // If we got here, the user's action was not recognized.
-            // Invoke the superclass to handle it.
             super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun share() {
+        try {
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.putExtra(Intent.EXTRA_TEXT, news.url)
+            shareIntent.type = "text/plain"
+            startActivity(Intent.createChooser(shareIntent, getString(R.string.share)))
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
