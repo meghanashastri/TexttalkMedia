@@ -36,11 +36,9 @@ class NewsDetailFragment : Fragment() {
         fragmentNewsDetailBinding.apply {
             tvTitle.text = news.title
             tvDescription.text = news.description
-
             tvPublisherSiteUrl.setOnClickListener {
                 news.url?.let { it1 -> openUrl(it1) }
             }
-
             Glide.with(ivNewsPic.context)
                 .load(news.urlToImage)
                 .into(ivNewsPic)
