@@ -3,6 +3,7 @@ package com.example.texttalkmedia
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.example.texttalkmedia.databinding.ActivityMainBinding
 import com.example.texttalkmedia.presentation.adapter.NewsListAdapter
 import com.example.texttalkmedia.presentation.viewmodel.NewsViewModel
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: NewsViewModel
     private lateinit var binding: ActivityMainBinding
 
+    var showMenu: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -28,6 +31,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.apply {
+            navController.addOnDestinationChangedListener { _, _, arguments ->
+
+                showMenu =
+                    arguments?.getBoolean("show_share_icon", false) == true
+
+            }
+        }
         viewModel = ViewModelProvider(this, factory)
             .get(NewsViewModel::class.java)
     }

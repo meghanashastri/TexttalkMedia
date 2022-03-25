@@ -1,10 +1,8 @@
 package com.example.texttalkmedia
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.texttalkmedia.data.model.Article
@@ -19,6 +17,7 @@ class NewsDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_news_detail, container, false)
     }
 
@@ -40,4 +39,25 @@ class NewsDetailFragment : Fragment() {
                 .into(ivNewsPic)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu,menu)
+        val item: MenuItem = menu.findItem(R.id.share)
+        item.isVisible = (activity as MainActivity).showMenu
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.share -> {
+            // User chose the "Settings" item, show the app settings UI...
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+
 }

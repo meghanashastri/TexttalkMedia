@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_newsListFragment_to_newsDetailFragment"
             app:destination="@id/newsDetailFragment" />
+        <argument
+            android:name="show_share_icon"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/newsDetailFragment"
@@ -22,5 +25,8 @@
         <argument
             android:name="selected_news_item"
             app:argType="com.example.texttalkmedia.data.model.Article" />
+        <argument
+            android:name="show_share_icon"
+            android:defaultValue="true" />
     </fragment>
 </navigation>

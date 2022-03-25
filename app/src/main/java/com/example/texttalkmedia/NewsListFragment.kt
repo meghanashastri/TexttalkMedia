@@ -1,10 +1,8 @@
 package com.example.texttalkmedia
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +22,7 @@ class NewsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_news_list, container, false)
     }
 
@@ -69,5 +68,12 @@ class NewsListFragment : Fragment() {
                 tvError.text = result?.message
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu,menu)
+        val item: MenuItem = menu.findItem(R.id.share)
+        item.isVisible = (activity as MainActivity).showMenu
     }
 }
