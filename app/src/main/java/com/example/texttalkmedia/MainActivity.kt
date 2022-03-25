@@ -3,12 +3,15 @@ package com.example.texttalkmedia
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.example.texttalkmedia.databinding.ActivityMainBinding
 import com.example.texttalkmedia.presentation.adapter.NewsListAdapter
 import com.example.texttalkmedia.presentation.viewmodel.NewsViewModel
 import com.example.texttalkmedia.presentation.viewmodel.NewsViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var factory: NewsViewModelFactory
