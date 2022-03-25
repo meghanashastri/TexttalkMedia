@@ -3,7 +3,6 @@ package com.example.texttalkmedia
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import com.example.texttalkmedia.databinding.ActivityMainBinding
 import com.example.texttalkmedia.presentation.adapter.NewsListAdapter
 import com.example.texttalkmedia.presentation.viewmodel.NewsViewModel

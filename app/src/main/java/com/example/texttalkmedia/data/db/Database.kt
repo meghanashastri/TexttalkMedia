@@ -6,7 +6,7 @@ import com.example.texttalkmedia.data.model.Article
 
 @Database(
     entities = [Article::class],
-    version = 1,
+    version = 7,
     exportSchema = false
 )
 abstract class Database : RoomDatabase() {

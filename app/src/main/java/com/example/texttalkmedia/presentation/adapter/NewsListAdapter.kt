@@ -1,6 +1,5 @@
 package com.example.texttalkmedia.presentation.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -13,7 +12,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>() {
 
     private val callback = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.article_id == newItem.article_id
         }
 
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -44,8 +43,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>() {
         val binding: ItemNewsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Article) {
-            binding.title.text = data.title
-
+            binding.title.text = data.title.toString()
             binding.root.setOnClickListener {
                 onItemClickListener?.let {
                     it(data)

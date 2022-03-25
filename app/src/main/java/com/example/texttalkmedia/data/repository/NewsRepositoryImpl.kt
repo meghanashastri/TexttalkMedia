@@ -1,5 +1,6 @@
 package com.example.texttalkmedia.data.repository
 
+import android.util.Log
 import com.example.texttalkmedia.data.model.NewsApiResponse
 import com.example.texttalkmedia.data.repository.datasource.NewsLocalDataSource
 import com.example.texttalkmedia.data.repository.datasource.NewsRemoteDataSource
