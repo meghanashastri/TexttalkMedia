@@ -1,6 +1,7 @@
 package com.example.texttalkmedia
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -35,7 +36,11 @@ class NewsDetailFragment : Fragment() {
         fragmentNewsDetailBinding.apply {
             tvTitle.text = news.title
             tvDescription.text = news.description
-            tvPublisherSiteUrl.text = news.url
+
+            tvPublisherSiteUrl.setOnClickListener {
+                news.url?.let { it1 -> openUrl(it1) }
+            }
+
             Glide.with(ivNewsPic.context)
                 .load(news.urlToImage)
                 .into(ivNewsPic)
@@ -69,6 +74,17 @@ class NewsDetailFragment : Fragment() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun openUrl(url: String) {
+        try {
+            val openURL = Intent(android.content.Intent.ACTION_VIEW)
+            openURL.data = Uri.parse(url)
+            startActivity(openURL)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
 }

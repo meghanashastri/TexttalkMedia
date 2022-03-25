@@ -34,27 +34,16 @@
             android:textColor="@color/description_color"
             android:textSize="@dimen/text_14" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvPublisherSiteUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_5"
-                android:text="@string/visit_url"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_12" />
-
-            <TextView
-                android:id="@+id/tvPublisherSiteUrl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/text_12" />
-        </LinearLayout>
+            android:layout_marginEnd="@dimen/dp_5"
+            android:padding="@dimen/dp_10"
+            android:text="@string/visit_url"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/text_12" />
 
     </LinearLayout>
 
