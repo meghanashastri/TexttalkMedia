@@ -14,20 +14,29 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
-    val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
 
-    val client : OkHttpClient = OkHttpClient.Builder().apply {
-        addInterceptor(interceptor)
-    }.build()
     @Singleton
     @Provides
-    fun provideRetrofitInstance(): Retrofit {
+    fun providesHttpLoggingInterceptor() = HttpLoggingInterceptor()
+        .apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+    @Singleton
+    @Provides
+    fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+        OkHttpClient
+            .Builder()
+            .addInterceptor(httpLoggingInterceptor)
+            .build()
+
+    @Singleton
+    @Provides
+    fun provideRetrofitInstance(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(com.example.texttalkmedia.BuildConfig.BASE_URL)
-            .client(client)
+            .client(okHttpClient)
             .build()
     }
 
